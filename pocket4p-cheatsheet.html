@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DJI Osmo Pocket 4P 拍摄参数速查表</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f0f2f5;
+    padding: 20px;
+    color: #1a1a1a;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  .header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #fff;
+    padding: 28px 32px;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 26px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .header .subtitle {
+    font-size: 14px;
+    color: #a8b2d1;
+    letter-spacing: 2px;
+  }
+  .header .badge {
+    display: inline-block;
+    background: #e94560;
+    color: #fff;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+
+  .base-setting {
+    background: #f8f9fa;
+    padding: 16px 32px;
+    border-bottom: 1px solid #e9ecef;
+  }
+  .base-setting h3 {
+    font-size: 13px;
+    color: #6c757d;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+  }
+  .base-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 8px;
+  }
+  .base-item {
+    background: #fff;
+    border-radius: 8px;
+    padding: 10px 12px;
+    border-left: 3px solid #16213e;
+  }
+  .base-item .label {
+    font-size: 11px;
+    color: #868e96;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .base-item .value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a2e;
+  }
+
+  .scenes {
+    padding: 24px 32px;
+  }
+  .scene-card {
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: stretch;
+    gap: 16px;
+    color: #fff;
+  }
+  .scene-icon {
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 60px;
+  }
+  .scene-info { flex: 1; }
+  .scene-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .scene-goal {
+    font-size: 12px;
+    opacity: 0.85;
+    margin-bottom: 12px;
+  }
+  .param-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 8px;
+  }
+  .param-box {
+    background: rgba(255,255,255,0.18);
+    border-radius: 8px;
+    padding: 8px 10px;
+    backdrop-filter: blur(4px);
+  }
+  .param-box .p-label {
+    font-size: 10px;
+    opacity: 0.8;
+    display: block;
+    margin-bottom: 2px;
+    letter-spacing: 0.5px;
+  }
+  .param-box .p-value {
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .tip {
+    margin-top: 10px;
+    font-size: 12px;
+    background: rgba(255,255,255,0.15);
+    padding: 7px 10px;
+    border-radius: 6px;
+    line-height: 1.5;
+  }
+  .tip::before { content: "💡 "; }
+
+  /* 场景配色 */
+  .scene-mountain { background: linear-gradient(135deg, #2d6a4f, #40916c); }
+  .scene-water { background: linear-gradient(135deg, #0077b6, #00b4d8); }
+  .scene-street { background: linear-gradient(135deg, #6c757d, #adb5bd); }
+  .scene-sunset { background: linear-gradient(135deg, #e76f51, #f4a261); }
+  .scene-sky { background: linear-gradient(135deg, #1d3557, #457b9d); }
+  .scene-night { background: linear-gradient(135deg, #22223b, #4a4e69); }
+
+  .footer {
+    background: #1a1a2e;
+    color: #a8b2d1;
+    padding: 16px 32px;
+    font-size: 12px;
+    text-align: center;
+    line-height: 1.8;
+  }
+  .footer strong { color: #fff; }
+
+  /* ===== 操作指引 ===== */
+  .ops-section {
+    padding: 24px 32px;
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+  }
+  .ops-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1a1a2e;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .swipe-diagram {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .swipe-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #e9ecef;
+  }
+  .swipe-arrow {
+    font-size: 28px;
+    color: #e94560;
+    min-width: 36px;
+    text-align: center;
+  }
+  .swipe-text .st-title {
+    font-size: 13px;
+    font-weight: bold;
+    color: #1a1a2e;
+  }
+  .swipe-text .st-desc {
+    font-size: 11px;
+    color: #6c757d;
+    margin-top: 2px;
+  }
+
+  .param-location {
+    background: #fff;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 12px;
+    border-left: 4px solid #16213e;
+  }
+  .param-location h4 {
+    font-size: 14px;
+    color: #16213e;
+    margin-bottom: 8px;
+  }
+  .param-location .steps {
+    font-size: 12px;
+    color: #495057;
+    line-height: 1.9;
+  }
+  .param-location .steps code {
+    background: #e9ecef;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    color: #c2255c;
+  }
+
+  /* ===== 自定义预设 C1/C2 ===== */
+  .preset-section {
+    padding: 24px 32px;
+    background: linear-gradient(135deg, #fff5f5 0%, #fff 100%);
+  }
+  .preset-flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 14px;
+    margin-bottom: 18px;
+  }
+  .flow-step {
+    flex: 1;
+    min-width: 160px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 14px;
+    border: 1px solid #ffc9c9;
+    position: relative;
+  }
+  .flow-step .num {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background: #e94560;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 22px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+  .flow-step .ft {
+    font-size: 12px;
+    font-weight: bold;
+    color: #1a1a2e;
+    margin-bottom: 4px;
+  }
+  .flow-step .fd {
+    font-size: 11px;
+    color: #6c757d;
+    line-height: 1.6;
+  }
+  .preset-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 12px;
+  }
+  .preset-table th {
+    background: #16213e;
+    color: #fff;
+    padding: 8px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .preset-table td {
+    padding: 8px;
+    border-bottom: 1px solid #ffe3e3;
+    color: #495057;
+  }
+  .preset-table tr:nth-child(even) { background: #fff5f5; }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .container { box-shadow: none; border-radius: 0; }
+    .scene-card, .preset-section, .ops-section, .flow-step, .param-location, .swipe-card { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .preset-section { background: #fff5f5 !important; }
+  }
+  @media (max-width: 600px) {
+    .header h1 { font-size: 20px; }
+    .scenes, .base-setting, .footer { padding-left: 16px; padding-right: 16px; }
+    .scene-icon { font-size: 32px; min-width: 48px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>DJI Osmo Pocket 4P 拍摄参数速查表</h1>
+    <div class="subtitle">TRAVEL SHOOTING CHEATSHEET</div>
+    <div class="badge">直出优化版 · 无需后期</div>
+  </div>
+
+  <div class="base-setting">
+    <h3>⚙️ 通用基础设置（Pocket 4P 专属）</h3>
+    <div class="base-grid">
+      <div class="base-item">
+        <span class="label">色彩模式</span>
+        <span class="value">普通色彩 10bit（直出）</span>
+      </div>
+      <div class="base-item">
+        <span class="label">机内影调</span>
+        <span class="value">NC负片/CC冷白 浓度70%</span>
+      </div>
+      <div class="base-item">
+        <span class="label">分辨率/帧率</span>
+        <span class="value">4K 30fps / 60fps</span>
+      </div>
+      <div class="base-item">
+        <span class="label">快门法则</span>
+        <span class="value">30fps→1/60，60fps→1/120</span>
+      </div>
+      <div class="base-item">
+        <span class="label">ISO（广角）</span>
+        <span class="value">100 起，白天≤400</span>
+      </div>
+      <div class="base-item">
+        <span class="label">ISO（中焦）</span>
+        <span class="value">50 起，画质更优</span>
+      </div>
+      <div class="base-item">
+        <span class="label">白平衡</span>
+        <span class="value">锁定手动K值</span>
+      </div>
+      <div class="base-item">
+        <span class="label">图像调节</span>
+        <span class="value">纹理-1 / 降噪0 / 锐度-1</span>
+      </div>
+      <div class="base-item">
+        <span class="label">对焦模式</span>
+        <span class="value">连续AF（默认）</span>
+      </div>
+      <div class="base-item">
+        <span class="label">云台速度</span>
+        <span class="value">慢（更丝滑）</span>
+      </div>
+      <div class="base-item">
+        <span class="label">HDR直出</span>
+        <span class="value">大光比场景开启</span>
+      </div>
+      <div class="base-item">
+        <span class="label">曝光模式</span>
+        <span class="value">手动(M)优先</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scenes">
+
+    <!-- 山景 -->
+    <div class="scene-card scene-mountain">
+      <div class="scene-icon">🏔️</div>
+      <div class="scene-info">
+        <div class="scene-title">山景 <span style="font-size:12px;opacity:.8">目标：翠绿通透</span></div>
+        <div class="scene-goal">广角拍大场面，中焦拍远山细节</div>
+        <div class="param-grid">
+          <div class="param-box"><span class="p-label">镜头</span><span class="p-value">广角(大场景)/中焦(远山)</span></div>
+          <div class="param-box"><span class="p-label">快门</span><span class="p-value">1/60~1/120</span></div>
+          <div class="param-box"><span class="p-label">ISO</span><span class="p-value">100-200</span></div>
+          <div class="param-box"><span class="p-label">ND</span><span class="p-value">晴 ND16 / 阴 ND8</span></div>
+          <div class="param-box"><span class="p-label">白平衡</span><span class="p-value">锁定 5200-5600K</span></div>
+          <div class="param-box"><span class="p-label">曝光补偿</span><span class="p-value">-0.5~-0.7 EV</span></div>
+        </div>
+        <div class="tip">大光比开HDR直出；中焦拍远山层次更好；纹理-1避免画面过硬</div>
+      </div>
+    </div>
+
+    <!-- 水景 -->
+    <div class="scene-card scene-water">
+      <div class="scene-icon">💧</div>
+      <div class="scene-info">
+        <div class="scene-title">水景 <span style="font-size:12px;opacity:.8">目标：清澈透亮</span></div>
+        <div class="scene-goal">广角拍开阔水面，中焦拍水面细节</div>
+        <div class="param-grid">
+          <div class="param-box"><span class="p-label">镜头</span><span class="p-value">广角(大水面)/中焦(细节)</span></div>
+          <div class="param-box"><span class="p-label">快门(清澈)</span><span class="p-value">1/250+</span></div>
+          <div class="param-box"><span class="p-label">快门(丝滑)</span><span class="p-value">1/30 或更慢</span></div>
+          <div class="param-box"><span class="p-label">ISO</span><span class="p-value">100</span></div>
+          <div class="param-box"><span class="p-label">ND</span><span class="p-value">ND16/32(慢门)</span></div>
+          <div class="param-box"><span class="p-label">白平衡</span><span class="p-value">锁定 4800-5200K</span></div>
+          <div class="param-box"><span class="p-label">曝光补偿</span><span class="p-value">-0.7~-1.0 EV</span></div>
+        </div>
+        <div class="tip">水面反光强多减曝光；慢门必须上ND；有条件加CPL偏振镜消反光更透</div>
+      </div>
+    </div>
+
+    <!-- 街景 -->
+    <div class="scene-card scene-street">
+      <div class="scene-icon">🏙️</div>
+      <div class="scene-info">
+        <div class="scene-title">街景 <span style="font-size:12px;opacity:.8">目标：人文生动</span></div>
+        <div class="scene-goal">广角拍环境，中焦拍人物特写</div>
+        <div class="param-grid">
+          <div class="param-box"><span class="p-label">镜头</span><span class="p-value">广角(环境)/中焦(人像)</span></div>
+          <div class="param-box"><span class="p-label">快门</span><span class="p-value">1/60~1/120</span></div>
+          <div class="param-box"><span class="p-label">ISO</span><span class="p-value">100-800</span></div>
+          <div class="param-box"><span class="p-label">ND</span><span class="p-value">ND8/16</span></div>
+          <div class="param-box"><span class="p-label">白平衡</span><span class="p-value">锁定 5200K</span></div>
+          <div class="param-box"><span class="p-label">曝光补偿</span><span class="p-value">-0.3~-0.5 EV</span></div>
+        </div>
+        <div class="tip">中焦60mm拍人像虚化好；FPV模式走路跟拍；人群密集用单次AF防误对焦</div>
+      </div>
+    </div>
+
+    <!-- 日落 -->
+    <div class="scene-card scene-sunset">
+      <div class="scene-icon">🌅</div>
+      <div class="scene-info">
+        <div class="scene-title">日落天色 <span style="font-size:12px;opacity:.8">目标：色彩浓郁</span></div>
+        <div class="scene-goal">广角拍天空大场景，中焦拍太阳特写</div>
+        <div class="param-grid">
+          <div class="param-box"><span class="p-label">镜头</span><span class="p-value">广角(天空)/中焦(太阳)</span></div>
+          <div class="param-box"><span class="p-label">快门</span><span class="p-value">1/60~1/120</span></div>
+          <div class="param-box"><span class="p-label">ISO</span><span class="p-value">100-400</span></div>
+          <div class="param-box"><span class="p-label">ND</span><span class="p-value">ND4/8（落日后取下）</span></div>
+          <div class="param-box"><span class="p-label">白平衡</span><span class="p-value">锁定 5000-5600K</span></div>
+          <div class="param-box"><span class="p-label">曝光补偿</span><span class="p-value">-0.5~-0.7 EV</span></div>
+        </div>
+        <div class="tip">日落前30-40分钟黄金时刻；长按锁定曝光(AE-L)；可开HDR保留云彩层次</div>
+      </div>
+    </div>
+
+    <!-- 蓝天 -->
+    <div class="scene-card scene-sky">
+      <div class="scene-icon">🌤️</div>
+      <div class="scene-info">
+        <div class="scene-title">蓝天 <span style="font-size:12px;opacity:.8">目标：纯净湛蓝</span></div>
+        <div class="scene-goal">广角拍天空云层，中焦拍云朵特写</div>
+        <div class="param-grid">
+          <div class="param-box"><span class="p-label">镜头</span><span class="p-value">广角(天空)/中焦(云朵)</span></div>
+          <div class="param-box"><span class="p-label">快门</span><span class="p-value">1/60~1/120</span></div>
+          <div class="param-box"><span class="p-label">ISO</span><span class="p-value">100-200</span></div>
+          <div class="param-box"><span class="p-label">ND</span><span class="p-value">ND16/32</span></div>
+          <div class="param-box"><span class="p-label">白平衡</span><span class="p-value">锁定 4800-5200K</span></div>
+          <div class="param-box"><span class="p-label">曝光补偿</span><span class="p-value">-0.7~-1.0 EV</span></div>
+        </div>
+        <div class="tip">天空易过曝多减曝光；开HDR保留云层细节；CC冷白影调让蓝色更纯净</div>
+      </div>
+    </div>
+
+    <!-- 夜景 -->
+    <div class="scene-card scene-night">
+      <div class="scene-icon">🌙</div>
+      <div class="scene-info">
+        <div class="scene-title">夜景 <span style="font-size:12px;opacity:.8">目标：干净有氛围</span></div>
+        <div class="scene-goal">广角拍城市灯光，中焦拍灯牌特写</div>
+        <div class="param-grid">
+          <div class="param-box"><span class="p-label">镜头</span><span class="p-value">广角(城景)/中焦(灯光)</span></div>
+          <div class="param-box"><span class="p-label">快门</span><span class="p-value">1/30~1/60</span></div>
+          <div class="param-box"><span class="p-label">ISO</span><span class="p-value">100-1600</span></div>
+          <div class="param-box"><span class="p-label">ND</span><span class="p-value">不装</span></div>
+          <div class="param-box"><span class="p-label">白平衡</span><span class="p-value">锁定 4800K</span></div>
+          <div class="param-box"><span class="p-label">曝光补偿</span><span class="p-value">-1.0 EV</span></div>
+        </div>
+        <div class="tip">夜景不能太亮！-1.0EV压噪点；开低光视频模式(4K30fps)；优先拍有灯光部分</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ 操作指引 ============ -->
+  <div class="ops-section">
+    <div class="ops-title">📱 小白操作指引 · 参数在哪里调</div>
+
+    <div class="swipe-diagram">
+      <div class="swipe-card">
+        <div class="swipe-arrow">⬆️</div>
+        <div class="swipe-text">
+          <div class="st-title">屏幕底部上滑</div>
+          <div class="st-desc">拍摄参数（快门/ISO/曝光补偿/分辨率）</div>
+        </div>
+      </div>
+      <div class="swipe-card">
+        <div class="swipe-arrow">⬅️</div>
+        <div class="swipe-text">
+          <div class="st-title">屏幕左滑</div>
+          <div class="st-desc">图像参数（色彩/白平衡/对比度/饱和度）</div>
+        </div>
+      </div>
+      <div class="swipe-card">
+        <div class="swipe-arrow">➡️</div>
+        <div class="swipe-text">
+          <div class="st-title">屏幕右滑</div>
+          <div class="st-desc">回放已拍素材</div>
+        </div>
+      </div>
+      <div class="swipe-card">
+        <div class="swipe-arrow">⬇️</div>
+        <div class="swipe-text">
+          <div class="st-title">屏幕顶部下滑</div>
+          <div class="st-desc">控制中心（WiFi/补光灯/摇杆设置）</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="param-location">
+      <h4>① 快门 / ISO / 曝光补偿（曝光三要素）</h4>
+      <div class="steps">
+        拍摄界面 <code>底部上滑</code> → 点右上角 <code>PRO</code> 开启高级模式 → 曝光选 <code>M（手动）</code> → 即可看到 快门 / ISO / EV 三个滑块
+      </div>
+    </div>
+
+    <div class="param-location">
+      <h4>② 白平衡（让天空蓝、日落暖）</h4>
+      <div class="steps">
+        拍摄界面 <code>左滑</code> → 找到 <code>白平衡</code> → 选 <code>手动</code> 调节色温值（K值越小越冷/蓝，越大越暖/黄）
+      </div>
+    </div>
+
+    <div class="param-location">
+      <h4>③ 色彩 / 机内影调 / 饱和度 / 锐度（直出关键）</h4>
+      <div class="steps">
+        拍摄界面 <code>左滑</code> → <code>色彩</code> 选 <code>普通色彩 10bit</code> → 开启 <code>胶片影调</code> 选 NC/CC/NV，浓度 <code>70%</code> → 图像调节：<code>饱和度 +1</code>、<code>锐度 -1</code>
+      </div>
+    </div>
+
+    <div class="param-location">
+      <h4>④ 分辨率 / 帧率</h4>
+      <div class="steps">
+        拍摄界面 <code>底部上滑</code> → 顶部 <code>拍摄规格</code> → 选 <code>4K 30fps</code> 或 <code>4K 60fps</code>
+      </div>
+    </div>
+
+    <div class="param-location">
+      <h4>⑤ 云台模式（街景/走路跟拍）</h4>
+      <div class="steps">
+        拍摄界面点 <code>云台模式图标</code>（左下角）或按 <code>自定义按键</code> → 选 <code>FPV</code>（跟拍有代入感）/ <code>跟随</code> / <code>锁定</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 自定义预设 C1/C2 ============ -->
+  <div class="preset-section">
+    <div class="ops-title">⚡ 自定义预设方案 C1/C2 · 一键切换场景</div>
+    <p style="font-size:12px;color:#6c757d;line-height:1.7;">
+      Pocket 4P 支持 <strong>自定义模式</strong>，可以把当前拍摄参数保存为 C1、C2 两套方案，之后一键调用，不用每次重新调。非常适合旅游时快速切换不同场景！
+    </p>
+
+    <div class="preset-flow">
+      <div class="flow-step">
+        <div class="num">1</div>
+        <div class="ft">调出手动模式</div>
+        <div class="fd">底部上滑 → PRO → 曝光选 M，按上表调好该场景所有参数</div>
+      </div>
+      <div class="flow-step">
+        <div class="num">2</div>
+        <div class="ft">保存为自定义</div>
+        <div class="fd">在参数界面找到 <strong>自定义模式</strong>（C1/C2），选择保存当前参数到 C1 或 C2</div>
+      </div>
+      <div class="flow-step">
+        <div class="num">3</div>
+        <div class="ft">设置快捷切换</div>
+        <div class="fd">长按 <strong>自定义按键</strong> → 功能设为 <code>切换 C1/C2</code> 或 <code>C1 快速拍录</code></div>
+      </div>
+      <div class="flow-step">
+        <div class="num">4</div>
+        <div class="ft">拍摄时一键切换</div>
+        <div class="fd">按一下自定义按键，即可在 C1 / C2 / 默认之间快速切换</div>
+      </div>
+    </div>
+
+    <h4 style="font-size:14px;color:#1a1a2e;margin-top:16px;">🎯 推荐预设分配方案</h4>
+    <table class="preset-table">
+      <thead>
+        <tr>
+          <th>预设位</th>
+          <th>推荐场景</th>
+          <th>核心参数</th>
+          <th>适用时机</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>C1</strong></td>
+          <td>白天通用（山/水/街/蓝天）</td>
+          <td>广角、ISO100、1/60、ND16、WB锁定5200K、EV-0.7、纹理-1锐度-1</td>
+          <td>白天户外，光线充足</td>
+        </tr>
+        <tr>
+          <td><strong>C2</strong></td>
+          <td>日落/暖色场景</td>
+          <td>广角/中焦、ISO100-400、1/60、ND4、WB锁定5200K、EV-0.5、锁定曝光AE-L</td>
+          <td>傍晚日落前30-40分钟</td>
+        </tr>
+        <tr>
+          <td>默认(Auto)</td>
+          <td>夜景/室内</td>
+          <td>广角、不装ND、ISO100-1600、WB锁定4800K、EV-1.0、低光模式</td>
+          <td>晚上或光线暗时</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:14px;background:#fff;border-radius:8px;padding:12px 14px;font-size:12px;color:#495057;line-height:1.8;border:1px dashed #ffc9c9;">
+      <strong>💡 小白提示：</strong><br>
+      • 只有 2 个自定义位（C1/C2），建议把最常用的「白天通用」和「日落」存进去<br>
+      • 夜景参数变化大，不建议存预设，现场用 Auto + 夜景模式更省心<br>
+      • 切换预设后，记得检查 ND 滤镜是否装上了！预设只管参数，不会自动提醒你换滤镜
+    </div>
+  </div>
+
+  <div class="footer">
+    <strong>📌 ND 滤镜速记：</strong>轻度白天 ND8/16 · 强光白天 ND32/64 · 长曝光 ND1000 · 夜景不装<br>
+    <strong>⚠️ 关键提醒：</strong>装ND后用手动曝光；白平衡锁定手动K值；夜景-1.0EV压噪点；美肤与胶片影调互斥<br>
+    直出优化：普通色彩10bit + 胶片影调NC/CC浓度70% + 纹理-1 + 锐度-1 + 降噪0
+  </div>
+
+  <!-- 来源说明 -->
+  <div style="background:#1a1a2e;padding:20px 32px;color:#8892b0;font-size:11px;line-height:1.9;">
+    <strong style="color:#e94560;">📚 参数参考来源（Pocket 4P 专属 + 多渠道）：</strong><br>
+    ① DJI 官方：《Osmo Pocket 4P 新手快速攻略》、用户手册（操作路径、C1/C2、ISO范围、胶片影调6种、HDR直出）<br>
+    ② B站高热度：王松傲寒「8分钟学会Pocket4P」(5.3万播)、风光喵「5个电影感秘诀」(2.3万播)、桂心骅「扫街人像参数」(2.3万播)、BV1KX7B6PER1夜景参数<br>
+    ③ Freewell 专业滤镜厂《DJI Pocket 4P Settings Guide》：快门法则、ND档位、图像纹理-1、云台慢速、低光设置<br>
+    ④ Geeky Gadgets / Tamara Gabriel：C1/C2预设分配、曝光补偿保护高光、白平衡锁定<br>
+    ⑤ B站实测：BV1w97V6xEbi夜拍(ISO800/快门1/50/普通10bit)、BV1oTTT6KEmW人像(60mm中焦/WB3900K)<br>
+    <span style="color:#5a6478;">注：参数为多渠道实战综合，4P宽容度更高(17级)，曝光补偿可较表值少减0.3EV微调</span>
+  </div>
+</div>
+</body>
+</html>
